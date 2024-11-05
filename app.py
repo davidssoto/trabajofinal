@@ -22,4 +22,19 @@ def mostrar_ejercicio():
     ejercicio = generar_ejercicio()
     st.write(
         f"Una rueda de masa {ejercicio['masa']} kg y radio {ejercicio['radio']} m "
-        f"gira con una aceleración angular de {ej
+        f"gira con una aceleración angular de {ejercicio['aceleracion_angular']} rad/s²."
+    )
+    st.write("¿Cuál es el torque requerido para esta aceleración angular?")
+
+    respuesta = st.number_input("Ingresa tu respuesta en N·m", min_value=0.0, step=0.1)
+
+    if st.button("Verificar respuesta"):
+        if math.isclose(respuesta, ejercicio["torque_correcto"], rel_tol=0.01):
+            st.success("¡Correcto! 🎉")
+        else:
+            st.error(f"Incorrecto. La respuesta correcta es {ejercicio['torque_correcto']:.2f} N·m")
+
+# Configuración principal de Streamlit
+st.title("Ejercicios de Dinámica de Rotación")
+st.write("Resuelve los siguientes ejercicios de dinámica de rotación y verifica tus respuestas.")
+mostrar_ejercicio()
